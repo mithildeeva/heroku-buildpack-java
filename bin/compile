@@ -19,6 +19,10 @@ export_env $ENV_DIR "." "JAVA_OPTS|JAVA_TOOL_OPTIONS"
 
 install_jdk "${BUILD_DIR}" "${CACHE_DIR}"
 
+for DIR in ".m2" ".maven" ; do
+ cp -r $CACHE_DIR/$DIR $BUILD_DIR/$DIR
+done
+
 [ -n "$(find ${BUILD_DIR} -type f -name "*.kt")" ] && mcount "kotlin.source"
 [ -n "$(find ${BUILD_DIR} -type f -name "*.groovy")" ] && mcount "groovy.source"
 
